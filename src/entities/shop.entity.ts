@@ -1,15 +1,18 @@
 import { Card } from './card.entity';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Shop {
   @PrimaryGeneratedColumn()
   public id!: number;
 
-  @OneToMany(() => Card, (card) => card)
-  public card!: Card[];
+  @ManyToOne(() => Card, (card) => card.shop)
+  public card!: Card;
 
   @Column({ type: 'int', nullable: false })
   public price!: number;
+
+  @Column({ type: 'text', nullable: false })
+  public text!: string;
 
 }

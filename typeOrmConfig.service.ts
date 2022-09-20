@@ -1,8 +1,12 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
-import { Report } from 'src/entities/report.entity';
 import { User } from 'src/entities/user.entity';
+import { Battle } from 'src/entities/battle.entity';
+import { Card } from 'src/entities/card.entity';
+import { Deck } from 'src/entities/deck.entity';
+import { Shop } from 'src/entities/shop.entity';
+
 
 @Injectable()
 export class TypeOrmConfigService implements TypeOrmOptionsFactory {
@@ -11,12 +15,13 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
 
   public createTypeOrmOptions(): TypeOrmModuleOptions {
     return {
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'mysecretpassword',
-      entities: [User, Notification, Report],
+      type: 'mysql',
+      host: '127.0.0.1',
+      port: 3306,
+      username: 'root',
+      password: '',
+      database: 'medivalstrike',
+      entities: [User, Battle, Card, Deck, Shop],
       synchronize: true,
     };
   }

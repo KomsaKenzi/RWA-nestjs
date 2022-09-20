@@ -4,6 +4,7 @@ import { CreateCardsDTO } from 'src/dto/createCards.dto';
 import { UpdateCardsDTO } from 'src/dto/updateCards.dto';
 import { Card } from 'src/entities/card.entity';
 import { User } from 'src/entities/user.entity';
+import { Shop } from 'src/entities/shop.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -11,6 +12,7 @@ export class CardsService {
   constructor(
     @InjectRepository(Card) private cardRepository: Repository<Card>,
     @InjectRepository(User) private userRepository: Repository<User>,
+    @InjectRepository(Shop) private shopRepository: Repository<Shop>,
   ) {}
 
   public async getCards() {
@@ -64,6 +66,7 @@ export class CardsService {
     card.defence = data.defence;
     card.attack = data.attack;
     card.id = data.id;
+    card.description = data.description;
 
     await this.cardRepository.update(data.id, card);
 
@@ -72,6 +75,10 @@ export class CardsService {
 
   public async deleteCards(id: number) {
     const card = await this.cardRepository.findOneBy({ id: id });
+    const shop = await this.shopRepository.findOneBy({ card: card });
+    if(shop) await this.shopRepository.remove(shop);
+    
+
     return this.cardRepository.remove(card);
   }
 }
