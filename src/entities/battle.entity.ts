@@ -7,7 +7,6 @@ import {
     JoinTable,
     PrimaryGeneratedColumn,
   } from 'typeorm';
-  import { Report } from './report.entity';
   import { User } from './user.entity';
   import { Deck } from './deck.entity';
   
@@ -21,21 +20,19 @@ import {
     users: User[]
 
     @Column({
-      type: 'timestamptz',
+      type: 'timestamp',
       nullable: false,
       default: () => 'CURRENT_TIMESTAMP',
     })
     public battleStarted!: Date;
   
     @Column({
-      type: 'timestamptz',
+      type: 'timestamp',
       nullable: false,
       default: () => 'CURRENT_TIMESTAMP',
     })
     public battleEnded!: Date;
   
-    @OneToMany(() => Report, (report) => report.battle)
-    public reports: Report[];
   
     @OneToOne(() => User, (user) => user)
     public winner: User[];

@@ -3,14 +3,13 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from 'src/entities/user.entity';
 import { createUserDTO } from 'src/dto/createUser.dto';
+import { UpdateShopDTO } from 'src/dto/updateShop.dto';
 
 
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectRepository(User) private userRepository: Repository<User>,
-    @InjectRepository(Notification)
-    private notificationRepository: Repository<Notification>,
+    @InjectRepository(User) private userRepository: Repository<User>
   ) {}
 
   public getUser(username: string) {
@@ -52,6 +51,7 @@ export class UsersService {
     return {
       username: user.username,
       userId: user.id,
+      balance: user.balance,
     };
   }
 
@@ -64,4 +64,23 @@ export class UsersService {
 
     return users;
   }
+
+  public async updateBalance(bal: UpdateShopDTO) {
+    const user: User = await this.userRepository.findOne({
+      where: { id: bal.id }
+    });
+
+    if (!user) return {};
+    const id = user.id
+    const balance = user.balance -= bal.price;
+    if (balance < 0)
+      throw new Error('Low balance!');
+
+    const data = {
+      id,
+      balance
+    };
+    return this.userRepository.update(data.id, data);
+  }
 }
+

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+/*import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateCardsDTO } from 'src/dto/createCards.dto';
 import { UpdateCardsDTO } from 'src/dto/updateCards.dto';
@@ -6,8 +6,6 @@ import { Card } from 'src/entities/card.entity';
 import { User } from 'src/entities/user.entity';
 import { Shop } from 'src/entities/shop.entity';
 import { Repository } from 'typeorm';
-import { Deck } from 'src/entities/deck.entity';
-import { OwnedCards } from 'src/entities/ownedCards.entity';
 
 @Injectable()
 export class CardsService {
@@ -15,8 +13,6 @@ export class CardsService {
     @InjectRepository(Card) private cardRepository: Repository<Card>,
     @InjectRepository(User) private userRepository: Repository<User>,
     @InjectRepository(Shop) private shopRepository: Repository<Shop>,
-    @InjectRepository(Deck) private deckRepository: Repository<Deck>,
-    @InjectRepository(OwnedCards) private ownedCardsRepository: Repository<OwnedCards>,
   ) {}
 
   public async getCards() {
@@ -81,18 +77,10 @@ export class CardsService {
   public async deleteCards(id: number) {
     const card = await this.cardRepository.findOneBy({ id: id });
     const shop = await this.shopRepository.findOneBy({ card: card });
-    let deck = await this.deckRepository.findBy({ card1: card.id });
-    if(deck) await this.deckRepository.remove(deck);
-     deck = await this.deckRepository.findBy({ card2: card.id });
-    if(deck) await this.deckRepository.remove(deck);
-     deck = await this.deckRepository.findBy({ card3: card.id });
-    if(deck) await this.deckRepository.remove(deck);
-
-    let owned = await this.ownedCardsRepository.findBy({ card: card });
-    if(owned) await this.ownedCardsRepository.remove(owned);
     if(shop) await this.shopRepository.remove(shop);
-
+    
 
     return this.cardRepository.remove(card);
   }
 }
+*/

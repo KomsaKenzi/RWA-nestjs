@@ -7,9 +7,10 @@ import { AuthModule } from './auth/auth.module';
 import { ShopModule } from './modules/shop/shop.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmConfigService } from 'typeOrmConfig.service';
-import { SongsController } from './songs/songs.controller';
 import { UsersController } from './modules/users/users.controller';
 import { CardsModule } from './modules/cards/cards.module';
+import { OwnedCardsModule } from './modules/owned-cards/owned-cards.module';
+import { DeckModule } from './modules/deck/deck.module';
 
 @Module({
   imports: [
@@ -21,8 +22,10 @@ import { CardsModule } from './modules/cards/cards.module';
     AuthModule,
     ShopModule,
     CardsModule,
+    OwnedCardsModule,
+    DeckModule,
   ],
-  controllers: [AppController, SongsController],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}

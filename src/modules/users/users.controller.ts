@@ -13,6 +13,7 @@ import {
   import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
   import { LocalAuthGuard } from 'src/auth/local-auth.guard';
   import { createUserDTO } from 'src/dto/createUser.dto';
+import { UpdateShopDTO } from 'src/dto/updateShop.dto';
   import { User } from 'src/entities/user.entity';
   import { UsersService } from './users.service';
   
@@ -22,7 +23,7 @@ import {
       private userService: UsersService,
       private authService: AuthService,
     ) {}
-  
+    
     @Post('register')
     public createUser(@Body() user: createUserDTO): Promise<User> {
       return this.userService.createUser(user);
@@ -56,5 +57,13 @@ import {
     ) {
       return this.userService.searchUsers(name, userID);
     }
+
+    @UseGuards(JwtAuthGuard)
+    @Put('updateBalance')
+    public updateBalance(@Body() bal: UpdateShopDTO) {
+    return this.userService.updateBalance(bal);
+  }
+
+
   }
   

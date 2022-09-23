@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+/*import { Module } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthService } from 'src/auth/auth.service';
@@ -9,19 +9,16 @@ import { UsersService } from '../users/users.service';
 import { CardsController } from './cards.controller';
 import { CardsService } from './cards.service';
 import { ShopService } from '../shop/shop.service';
-import { Deck } from 'src/entities/deck.entity';
-import { OwnedCards } from 'src/entities/ownedCards.entity';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Card]),
     TypeOrmModule.forFeature([User]),
     TypeOrmModule.forFeature([Shop]),
-    TypeOrmModule.forFeature([Deck]),
-    TypeOrmModule.forFeature([OwnedCards]),
   ],
   controllers: [CardsController],
   providers: [CardsService, AuthService, JwtService, UsersService, ShopService],
   exports: [CardsService],
 })
 export class CardsModule {}
+*/

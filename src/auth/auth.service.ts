@@ -21,14 +21,14 @@ export class AuthService {
     const payload = {
       username: user.username,
       id: user.id,
-      profileType: user.profileType,
+      profiles: user.profiles,
     };
     return {
       access_token: this.jwtService.sign(payload, {
         secret: process.env.SECRET,
       }),
       username: user.username,
-      profileType: user.profileType,
+      profiles: user.profiles,
       id: user.id,
     };
   }

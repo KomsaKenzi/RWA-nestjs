@@ -1,5 +1,8 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Shop } from './shop.entity';
+import { Deck } from './deck.entity';
+import { OwnedCards } from './ownedCards.entity';
+
 
 @Entity()
 export class Card {
@@ -23,4 +26,7 @@ export class Card {
 
   @OneToMany(() => Shop, (shop) => shop.card)
   public shop!: Shop;
+
+  @OneToMany(() => OwnedCards, (ownedCards) => ownedCards.card)
+  public ownedCards!: OwnedCards;
 }

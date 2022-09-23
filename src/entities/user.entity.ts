@@ -1,7 +1,7 @@
 import { profiles } from '../enums/profiles.enum';
-import { Report } from './report.entity';
 import { Deck } from './deck.entity';
 import { Battle } from './battle.entity';
+import { OwnedCards } from './ownedCards.entity';
 import {
   Column,
   Entity,
@@ -24,7 +24,7 @@ export class User {
   public password!: string;
 
   @Column({ type: 'text', nullable: false, default: profiles.user })
-  public profileType!: string;
+  public profiles!: string;
 
   @Column({ type: 'int', nullable: false, default: 1000 })
   public balance!: number;
@@ -32,9 +32,9 @@ export class User {
   @OneToMany(() => Deck, (deck) => deck.user)
   public decks: Deck[];
 
-  @OneToMany(() => Report, (report) => report.user)
-  public reports: Report[];
-
   @OneToMany(() => Battle, (battle) => battle.users)
   public battles: Battle[];
+
+  @OneToMany(() => OwnedCards, (ownedCards) => ownedCards.user)
+  public ownedCards!: OwnedCards;
 }

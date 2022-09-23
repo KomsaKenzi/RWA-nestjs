@@ -6,6 +6,7 @@ import { Battle } from 'src/entities/battle.entity';
 import { Card } from 'src/entities/card.entity';
 import { Deck } from 'src/entities/deck.entity';
 import { Shop } from 'src/entities/shop.entity';
+import { OwnedCards } from 'src/entities/ownedCards.entity';
 
 
 @Injectable()
@@ -21,7 +22,7 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
       username: 'root',
       password: '',
       database: 'medivalstrike',
-      entities: [User, Battle, Card, Deck, Shop],
+      entities: [User, Battle, Card, Deck, Shop, OwnedCards],
       synchronize: true,
     };
   }

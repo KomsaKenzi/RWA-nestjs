@@ -5,5 +5,5 @@ export interface createUserDTO {
   password: string;
   username: string;
   profiles?: profiles;
-  balance: number;
+  balance?: number;
 }
